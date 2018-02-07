@@ -16,7 +16,7 @@
                 {
                     "settings": {
                         "method": "GET",
-                        "path": "/pet/:petId",
+                        "path": "/pet/:id",
                         "autoIdReply": "false",
                         "useReplyHandler": "false"
                     },
@@ -79,8 +79,8 @@
                                 "inputMappings": [
                                     {
                                         "type": 1,
-                                        "value": "{T.pathParams}.petId",
-                                        "mapTo": "pathParams.id"
+                                        "value": "{T.pathParams}",
+                                        "mapTo": "pathParams"
                                     }
                                 ]
                             },
