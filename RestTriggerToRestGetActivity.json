@@ -16,7 +16,7 @@
                 {
                     "settings": {
                         "method": "GET",
-                        "path": "/pet/:id",
+                        "path": "/pet/:petId",
                         "autoIdReply": "false",
                         "useReplyHandler": "false"
                     },
@@ -53,7 +53,7 @@
                                     },
                                     {
                                         "name": "uri",
-                                        "value": "http://petstore.swagger.io/v2/pet/:id",
+                                        "value": "http://petstore.swagger.io/v2/pet/:petId",
                                         "required": true,
                                         "type": "string"
                                     },
@@ -81,69 +81,6 @@
                                         "type": 1,
                                         "value": "{T.pathParams}",
                                         "mapTo": "pathParams"
-                                    }
-                                ]
-                            },
-                            {
-                                "id": 3,
-                                "name": "Log Message",
-                                "description": "Simple Log Activity",
-                                "type": 1,
-                                "activityType": "github-com-tibco-software-flogo-contrib-activity-log",
-                                "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
-                                "attributes": [
-                                    {
-                                        "name": "message",
-                                        "value": "Success",
-                                        "required": false,
-                                        "type": "string"
-                                    },
-                                    {
-                                        "name": "flowInfo",
-                                        "value": "true",
-                                        "required": false,
-                                        "type": "boolean"
-                                    },
-                                    {
-                                        "name": "addToFlow",
-                                        "value": "true",
-                                        "required": false,
-                                        "type": "boolean"
-                                    }
-                                ]
-                            },
-                            {
-                                "id": 4,
-                                "name": "Log Message (2)",
-                                "description": "Simple Log Activity",
-                                "type": 1,
-                                "activityType": "github-com-tibco-software-flogo-contrib-activity-log",
-                                "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
-                                "attributes": [
-                                    {
-                                        "name": "message",
-                                        "value": "",
-                                        "required": false,
-                                        "type": "string"
-                                    },
-                                    {
-                                        "name": "flowInfo",
-                                        "value": "true",
-                                        "required": false,
-                                        "type": "boolean"
-                                    },
-                                    {
-                                        "name": "addToFlow",
-                                        "value": "true",
-                                        "required": false,
-                                        "type": "boolean"
-                                    }
-                                ],
-                                "inputMappings": [
-                                    {
-                                        "type": 1,
-                                        "value": "{A2.result}.id",
-                                        "mapTo": "message"
                                     }
                                 ]
                             },
@@ -216,18 +153,6 @@
                             {
                                 "id": 1,
                                 "from": 2,
-                                "to": 3,
-                                "type": 0
-                            },
-                            {
-                                "id": 2,
-                                "from": 3,
-                                "to": 4,
-                                "type": 0
-                            },
-                            {
-                                "id": 3,
-                                "from": 4,
                                 "to": 12,
                                 "type": 0
                             },
