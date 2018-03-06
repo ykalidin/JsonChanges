@@ -50,7 +50,7 @@
                 "attributes": [
                   {
                     "name": "method",
-                    "value": "GET",
+                    "value": "PUT",
                     "required": true,
                     "type": "string"
                   },
