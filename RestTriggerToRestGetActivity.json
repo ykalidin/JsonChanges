@@ -178,6 +178,40 @@
                                         "mapTo": "data"
                                     }
                                 ]
+                            },
+                            {
+                                "id": 5,
+                                "name": "Reply To Trigger (3)",
+                                "description": "Simple Reply Activity",
+                                "type": 1,
+                                "activityType": "tibco-reply",
+                                "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
+                                "attributes": [
+                                    {
+                                        "name": "code",
+                                        "value": 200,
+                                        "required": true,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "data",
+                                        "value": null,
+                                        "required": true,
+                                        "type": "any"
+                                    }
+                                ],
+                                "inputMappings": [
+                                    {
+                                        "type": 1,
+                                        "value": "$activity[2].status",
+                                        "mapTo": "code"
+                                    },
+                                    {
+                                        "type": 1,
+                                        "value": "$activity[2].result",
+                                        "mapTo": "data"
+                                    }
+                                ]
                             }
                         ],
                         "links": [
@@ -186,7 +220,7 @@
                                 "from": 2,
                                 "to": 3,
                                 "type": 1,
-                                "value": "${A2.status}>=200 && ${A2.status}<=299"
+                                "value": "$activity[2].status>=200 && $activity[2].status<300"
                             },
                             {
                                 "id": 2,
@@ -199,12 +233,12 @@
                                 "from": 2,
                                 "to": 4,
                                 "type": 1,
-                                "value": "${A2.status}>=400"
+                                "value": "$activity[2].status>=400"
                             },
                             {
                                 "id": 4,
                                 "from": 4,
-                                "to": 5,
+                                "to": 6,
                                 "type": 0
                             }
                         ],
