@@ -186,7 +186,7 @@
                                 "from": 2,
                                 "to": 3,
                                 "type": 1,
-                                "value": "${A2.status}>=200 && ${A2.status}<300"
+                                "value": "${A2.status}>=200 && ${A2.status}<=299"
                             },
                             {
                                 "id": 2,
