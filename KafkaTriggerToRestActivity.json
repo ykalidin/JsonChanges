@@ -223,7 +223,7 @@
                 "from": "rest_2",
                 "to": "log_3",
                 "type": 1,
-                "value": "$activity[rest_2].status>=200 && $activity[rest_2].status<300"
+                "value": "$activity[rest_2].status>=200"
               },
               {
                 "id": 2,
