@@ -28,11 +28,11 @@
                     "type": 1,
                     "attributes": [],
                     "rootTask": {
-                        "id": 1,
+                       "id": "root",
                         "type": 1,
                         "tasks": [
                             {
-                                "id": 2,
+                                "id": "rest_2",
                                 "name": "Invoke REST Service",
                                 "description": "Simple REST Activity",
                                 "type": 1,
@@ -79,7 +79,7 @@
                                 ]
                             },
                             {
-                                "id": 3,
+                                "id": "log_3",
                                 "name": "Log Message",
                                 "description": "Simple Log Activity",
                                 "type": 1,
@@ -107,7 +107,7 @@
                                 ]
                             },
                             {
-                                "id": 7,
+                                "id": "log_5",
                                 "name": "Log Message (4)",
                                 "description": "Simple Log Activity",
                                 "type": 1,
@@ -142,7 +142,7 @@
                                 ]
                             },
                             {
-                                "id": 4,
+                                "id": "log_4",
                                 "name": "Log Message (2)",
                                 "description": "Simple Log Activity",
                                 "type": 1,
@@ -170,7 +170,7 @@
                                 ]
                             },
                             {
-                                "id": 8,
+                                "id": "log_6",
                                 "name": "Log Message (5)",
                                 "description": "Simple Log Activity",
                                 "type": 1,
@@ -208,28 +208,28 @@
                         "links": [
                             {
                                 "id": 1,
-                                "from": 2,
-                                "to": 3,
+                                "from": rest_2,
+                                "to": log_3,
                                 "type": 1,
-                                "value": "$activity[2].status>=200 && $activity[2].status<300"
+                                "value": "$activity[rest_2].status>=200 && $activity[rest_2].status<300"
                             },
                             {
                                 "id": 2,
-                                "from": 3,
-                                "to": 7,
+                                "from": log_3,
+                                "to": log_5,
                                 "type": 0
                             },
                             {
                                 "id": 3,
-                                "from": 2,
-                                "to": 4,
+                                "from": rest_2,
+                                "to": log_4,
                                 "type": 1,
-                                "value": "$activity[2].status>400"
+                                "value": "$activity[rest_2].status>400"
                             },
                             {
                                 "id": 4,
-                                "from": 4,
-                                "to": 8,
+                                "from": log_4,
+                                "to": log_6,
                                 "type": 0
                             }
                         ],
