@@ -1,49 +1,210 @@
-{"mashling_schema":"mashlingschema",
-  "gateway": {
-    "name": "KafkaTrigger-To-KafkaActivity-mashling-linux",
-    "version": "1.0.0",
-    "description": "This is the first microgateway app",
-    "configurations": [
-      {
-        "name": "kafkaConfig",
-        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
-        "description": "Configuration for kafka cluster",
-        "settings": {
-          "BrokerUrl": "localhost:9092"
-        }
-      }
-    ],
+{
+    "name": "Proxy",
+    "type": "flogo:app",
+    "version": "0.0.1",
+    "description": "",
     "triggers": [
-      {
-        "name": "kafka_trigger1",
-        "description": "The trigger on kafka 'users' topic",
-        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
-        "settings": {
-          "Topic": "syslog",
-          "config": "${configurations.kafkaConfig}"
+        {
+            "name": "Receive HTTP Message",
+            "ref": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+            "description": "Simple REST Trigger",
+            "settings": {
+                "port": "9096"
+            },
+            "id": "receive_http_message",
+            "handlers": [
+                {
+                    "settings": {
+                        "method": "POST",
+                        "path": "/",
+                        "autoIdReply": "false",
+                        "useReplyHandler": "false"
+                    },
+                    "actionId": "flow"
+                }
+            ]
         }
-      }
     ],
-    "event_handlers": [
-      {
-        "name": "kafka_handler1",
-        "description": "Handle the user access",
-        "reference": "github.com/TIBCOSoftware/mashling-lib/flow/KafkaTriggerToKafkaActivity.json",
-        "params": {}
-      }
-    ],
-    "event_links": [
-      {
-        "triggers": [
-          "kafka_trigger1"
-        ],
-        "dispatches": [
-          {
-            "if": "trigger.content != undefined",
-            "handler": "kafka_handler1"
-          }
-        ]
-      }
+    "actions": [
+        {
+            "data": {
+                "flow": {
+                    "name": "flow",
+                    "explicitReply": true,
+                    "type": 1,
+                    "attributes": [],
+                    "rootTask": {
+                        "id": 1,
+                        "type": 1,
+                        "tasks": [
+                            {
+                                "id": 2,
+                                "name": "Invoke REST Service",
+                                "description": "Simple REST Activity",
+                                "type": 1,
+                                "activityType": "github-com-tibco-software-mashling-ext-flogo-activity-rest",
+                                "activityRef": "github.com/TIBCOSoftware/mashling/ext/flogo/activity/rest",
+                                "attributes": [
+                                    {
+                                        "name": "method",
+                                        "value": "POST",
+                                        "required": true,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "uri",
+                                        "value": "http://localhost:8080",
+                                        "required": true,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "pathParams",
+                                        "value": null,
+                                        "required": false,
+                                        "type": "params"
+                                    },
+                                    {
+                                        "name": "queryParams",
+                                        "value": null,
+                                        "required": false,
+                                        "type": "params"
+                                    },
+                                    {
+                                        "name": "content",
+                                        "value": null,
+                                        "required": false,
+                                        "type": "any"
+                                    },
+                                    {
+                                        "name": "tracing",
+                                        "value": null,
+                                        "type": "any"
+                                    }
+                                ],
+                                "inputMappings": [
+                                    {
+                                        "type": 1,
+                                        "value": "$flow.method",
+                                        "mapTo": "method"
+                                    },
+                                    {
+                                        "type": 1,
+                                        "value": "$flow.uri",
+                                        "mapTo": "uri"
+                                    },
+                                    {
+                                        "type": 1,
+                                        "value": "$flow.content",
+                                        "mapTo": "content"
+                                    },
+                                    {
+                                        "type": 1,
+                                        "value": "$flow.tracing",
+                                        "mapTo": "tracing"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 3,
+                                "name": "Reply To Trigger",
+                                "description": "Simple Reply Activity",
+                                "type": 1,
+                                "activityType": "tibco-reply",
+                                "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
+                                "attributes": [
+                                    {
+                                        "name": "code",
+                                        "value": 200,
+                                        "required": true,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "name": "data",
+                                        "value": null,
+                                        "required": false,
+                                        "type": "any"
+                                    }
+                                ],
+                                "inputMappings": [
+                                    {
+                                        "type": 1,
+                                        "value": "$activity[2].result",
+                                        "mapTo": "data"
+                                    }
+                                ]
+                            }
+                        ],
+                        "links": [
+                            {
+                                "id": 1,
+                                "from": 2,
+                                "to": 3,
+                                "type": 0
+                            }
+                        ],
+                        "attributes": []
+                    },
+                    "errorHandlerTask": {
+                        "id": 3,
+                        "type": 1,
+                        "tasks": [
+                            {
+                                "id": 10,
+                                "name": "Error Message",
+                                "description": "Simple Log Activity",
+                                "type": 1,
+                                "activityType": "github-com-tibco-software-flogo-contrib-activity-log",
+                                "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
+                                "attributes": [
+                                    {
+                                        "name": "message",
+                                        "value": "Error processing request in gateway",
+                                        "required": false,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "flowInfo",
+                                        "value": "true",
+                                        "required": false,
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "name": "addToFlow",
+                                        "value": "true",
+                                        "required": false,
+                                        "type": "boolean"
+                                    }
+                                ]
+                            }
+                        ],
+                        "links": [],
+                        "attributes": []
+                    }
+                }
+            },
+            "id": "flow",
+            "metadata": {
+              "input": [
+                {
+                  "name": "method",
+                  "type": "string"
+                },
+                {
+                  "name": "uri",
+                  "type": "string"
+                },
+                {
+                  "name": "content",
+                  "type": "any"
+                },
+                {
+                  "name": "tracing",
+                  "type": "any"
+                }
+              ],
+              "output": []
+            },
+            "ref": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
+        }
     ]
-  }
 }
