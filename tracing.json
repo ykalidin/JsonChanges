@@ -48,7 +48,8 @@
                 "attributes": [
                   {
                     "name": "tracing",
-                    "value": null
+                    "value": null,
+                    "type": "any",
                   }
                 ],
                 "inputMappings": [
