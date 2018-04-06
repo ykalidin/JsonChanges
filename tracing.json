@@ -81,7 +81,8 @@
                 "attributes": [
                   {
                     "name": "span",
-                    "value": null
+                    "value": null,
+                    "type": "any"
                   }
                 ],
                 "inputMappings": [
