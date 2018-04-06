@@ -49,7 +49,7 @@
                   {
                     "name": "tracing",
                     "value": null,
-                    "type": "any",
+                    "type": "any"
                   }
                 ],
                 "inputMappings": [
