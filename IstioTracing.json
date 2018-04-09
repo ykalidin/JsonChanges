@@ -48,15 +48,15 @@
                 "attributes": [
                   {
                     "name": "tracing",
-                    "value": null
+                    "value": null,
+                    "type":"any"
                   }
                 ],
                 "inputMappings": [
                   {
                     "type": 1,
                     "value": "{T.tracing}",
-                    "mapTo": "tracing",
-                    "type":"any"
+                    "mapTo": "tracing"
                   }
                 ]
               },
