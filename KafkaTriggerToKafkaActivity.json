@@ -14,7 +14,7 @@
         {
           "actionId": "flow",
           "settings": {
-            "Topic": "publishpet"
+            "Topic": "publish1"
           }
         }
       ]
@@ -47,7 +47,7 @@
                                     },
                                     {
                                         "name": "Topic",
-                                        "value": "subscribepet",
+                                        "value": "subscribe1",
                                         "required": false,
                                         "type": "string"
                                     },
@@ -63,6 +63,42 @@
                                         "type": 1,
                                         "value": "{T.message}",
                                         "mapTo": "Message"
+                                    }
+                                ]
+                            }
+                        ],
+                        "links": [],
+                        "attributes": []
+                    },
+                    "errorHandlerTask": {
+                        "id": 3,
+                        "type": 1,
+                        "tasks": [
+                            {
+                                "id": 4,
+                                "name": "Log Message (2)",
+                                "description": "Simple Log Activity",
+                                "type": 1,
+                                "activityType": "tibco-log",
+                                "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
+                                "attributes": [
+                                    {
+                                        "name": "message",
+                                        "value": "Error processing request in gateway",
+                                        "required": false,
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "flowInfo",
+                                        "value": "false",
+                                        "required": false,
+                                        "type": "boolean"
+                                    },
+                                    {
+                                        "name": "addToFlow",
+                                        "value": "false",
+                                        "required": false,
+                                        "type": "boolean"
                                     }
                                 ]
                             }
